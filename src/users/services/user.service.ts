@@ -1,8 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from 'src/dtos/user.dto';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUserDto, UpdateUserDto } from 'src/users/dtos/user.dto';
+import { Order } from '../entities/order.entity';
+import { ProductsService } from 'src/products/services/products.service';
 
 @Injectable()
 export class UserService {
+
+  constructor(private productService: ProductsService, @Inject('API_KEY') private apiKey: string) {}
+
   private users = [
     {
       id: 1,
@@ -80,5 +85,14 @@ export class UserService {
       }
       this.users = this.users.filter(user => user.id !== id);
       return id;
+    }
+
+    getOrders(id: number): Order {
+      const user = this.findOne(id);
+      return {
+        date: new Date(),
+        user,
+        products: this.productService.findAll(),
+      };
     }
 }

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { ParseIntPipe } from 'src/common/parse-int/parse-int.pipe';
-import { CreateBrandDto, UpdateBrandDto } from 'src/dtos/brand.dto';
-import { BrandsService } from 'src/services/brands/brands.service';
+import { CreateBrandDto, UpdateBrandDto } from 'src/products/dtos/brand.dto';
+import { BrandsService } from 'src/products/services/brands.service';
 
 @Controller('brand')
 export class BrandController {

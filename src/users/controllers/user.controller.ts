@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from 'src/dtos/user.dto';
-import { UserService } from 'src/services/user/user.service';
+import { CreateUserDto, UpdateUserDto } from 'src/users/dtos/user.dto';
+import { UserService } from 'src/users/services/user.service';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   constructor(private usersService: UserService) {}
   //PRIMERO LAS RUTAS ABSOLUTAS
   @Get('')
@@ -27,6 +27,12 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   getOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(id);
+  }
+
+  @Get(':id/orders')
+  @HttpCode(HttpStatus.OK)
+  getOrders(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getOrders(id);
   }
 
   @Post()
