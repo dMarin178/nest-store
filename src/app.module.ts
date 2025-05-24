@@ -7,11 +7,12 @@ import { UsersModule } from './users/users.module';
 import { lastValueFrom } from 'rxjs';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { enviroments } from './enviroments';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',//ENV VARIABLES
+      envFilePath: enviroments[process.env.NODE_ENV] || '.env',//ENV VARIABLES
       isGlobal: true,//USE IN ALL MODULES
     }),
     DatabaseModule,

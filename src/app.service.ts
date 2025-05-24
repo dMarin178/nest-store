@@ -1,15 +1,16 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AppService {
 
   constructor(
-    @Inject('API_KEY') private apiKey: string,//PROVIDER USE_VALUE EXAMPLE
     @Inject('TASKS') private task: any,//USE FACOTRY FOR MAKE ASYNC CALLS
+    private config: ConfigService
   ){}
 
   getHello(): string {
-    console.log(this.task);
-    return 'Hello World! ' + this.apiKey;
+    const apiKey = this.config.get('API_KEY');
+    return 'Hello World! ' + apiKey;
   }
 }
