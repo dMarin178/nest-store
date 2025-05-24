@@ -6,9 +6,19 @@ import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
 import { lastValueFrom } from 'rxjs';
 import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [DatabaseModule, HttpModule, UsersModule, ProductsModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',//ENV VARIABLES
+      isGlobal: true,//USE IN ALL MODULES
+    }),
+    DatabaseModule,
+    HttpModule,
+    UsersModule,
+    ProductsModule
+  ],
   controllers: [AppController],
   providers: [AppService,
     //USE FACOTRY FOR MAKE ASYNC CALLS
