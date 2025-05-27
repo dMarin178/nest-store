@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
 import { CreateCustomerDto, UpdateCustomerDto } from 'src/users/dtos/customer.dto';
 import { CustomerService } from 'src/users/services/customer.service';
 
@@ -7,6 +8,7 @@ export class CustomerController {
   constructor(private customerService: CustomerService) {}
 
   @Get('')
+  @ApiOperation({summary: 'List of customers'}) // ENDPOINT DESCRIPTION FOR SWAGGER
   @HttpCode(HttpStatus.OK)
   getAll(
     @Query('limit') limit: number = 100,

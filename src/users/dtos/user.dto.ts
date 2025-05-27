@@ -13,7 +13,7 @@ export class CreateUserDto {
   @IsString()
   password: string;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'User name' })
   @IsNotEmpty()
   @IsString()
   name: string;
